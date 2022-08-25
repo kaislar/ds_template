@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main 
+      - 'dev'
+  pull_request:
+    branches: 
+      - main 
+      - 'dev'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m install pip-compile
+        pip-compile --output-file requirements.txt requirements.in requirements_dev.in
+        python -m pip install requirements.txt
+
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')
+        
+    - name: Run tests with pytest
+      run: |
+        python -m pytest
+
+
