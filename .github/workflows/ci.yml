@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main 
+      - 'dev'
+  pull_request:
+    branches: 
+      - main 
+      - 'dev'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip 
+        python -m pip install pip-tools
+        pip-compile --output-file requirements.txt requirements.in requirements_dev.in
+        python -m  pip install coverage
+        python -m pip install -r requirements.txt
+
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')
+        
+    - name: Run tests with pytest
+      run: |
+        coverage run -m pytest 
+
+    - name: Coverage Badge
+      uses: tj-actions/coverage-badge-py@v1.8
+
+    - name: Verify Changed files
+      uses: tj-actions/verify-changed-files@v9
+      id: changed_files
+      with:
+        files: coverage.svg
+
+    - name: Commit files
+      if: steps.changed_files.outputs.files_changed == 'true'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add coverage.svg
+        git commit -m "Updated coverage.svg"
+
+    - name: Push changes
+      if: steps.changed_files.outputs.files_changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.github_token }}
+        branch: ${{ github.ref }}
