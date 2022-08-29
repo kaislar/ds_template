@@ -1,6 +1,7 @@
 *.csv
 *.json
 data/*
+secrets/*
 key/*
 fig/*
 .vscode/**

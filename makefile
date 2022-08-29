@@ -6,7 +6,7 @@ precommit:
 .PHONY: lint
 lint:
 	python -m pylint --version
-	python -m pylint src
+	find . -type f -name "*.py" | xargs python -m pylint
 ## Run tests using pytest
 .PHONY: test
 test:

@@ -3,3 +3,4 @@ pip-tools==1.8.0
 pylint==2.14.5
 pytest==7.1.2
 black==22.6.0
+coverage==6.4.4

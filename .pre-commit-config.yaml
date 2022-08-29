@@ -4,7 +4,7 @@ repos:
       rev: 22.6.0
       hooks:
           - id: black
-    # Sort imports 
+    # Sort imports
     - repo: https://github.com/pycqa/isort
       rev: 5.10.1
       hooks:
@@ -20,8 +20,8 @@ repos:
           - id: detect-private-key
           - id: check-added-large-files
           - id: mixed-line-ending
-          
-    # Run black on python code in .md files 
+
+    # Run black on python code in .md files
     - repo: https://github.com/asottile/blacken-docs
       rev: v1.12.1
       hooks:
