@@ -8,7 +8,7 @@ lint:
 	python -m pylint --version
 	find . -type f -name "*.py" | xargs python -m pylint
 ## Run tests using pytest
-.PHONY: test
+.PHONY: tests
 test:
 	python -m pytest --version
 	python -m pytest tests
@@ -19,4 +19,4 @@ black:
 	python -m black .
 ## Run ci part
 .PHONY: ci
-ci: precommit test
+ci: precommit tests
