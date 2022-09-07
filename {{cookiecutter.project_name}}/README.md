@@ -16,7 +16,8 @@
 
 
 ## 🧐 About <a name = "about"></a>
-Write about 1-2 paragraphs describing the purpose of your project.
+
+{{cookiecutter.project_short_description}}
 
 ## 🔖 Project structure
 
@@ -79,4 +80,4 @@ make precommit
 ```
 
 ##  ✍️ Authors
-{{cookiecutter.email}}
+{{cookiecutter.full_name}} - {{cookiecutter.email}}
