@@ -5,7 +5,7 @@
  <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">{{cookiecutter.project_name}}</h3>
 
 <div align="center">
 
@@ -21,7 +21,7 @@ Write about 1-2 paragraphs describing the purpose of your project.
 ## 🔖 Project structure
 
 ```
-Project_folder/
+{{cookiecutter.project_name}}/
 |- bin/          # contains scripts and main files that should be run
 |- config/       # config files
 |- notebooks/    # notebooks for EDA and exploration
