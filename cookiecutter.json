@@ -1,0 +1,9 @@
+{
+    "full_name": "Your Name",
+    "email": "you@yourdomain.com",
+    "project_name": "project_name",
+    "gitlab_repo_url": "https or ssh url to clone the project",
+    "project_short_description": "Sample project .....",
+    "python_major_version": 3,
+    "python_minor_version": 10
+}
